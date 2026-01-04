@@ -20,8 +20,11 @@ plugins {
 // /*dev*/ apply plugin: 'cz.habarta.typescript-generator'
 
 version = '3.0'
-sourceCompatibility = 11
-targetCompatibility = 11
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
 
 repositories {
     mavenCentral()
@@ -33,12 +36,6 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
     implementation 'org.scala-lang:scala-library:2.13.10'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2'
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-    kotlinOptions {
-        jvmTarget = '11'
-    }
 }
 
 generateTypeScript {
