@@ -237,6 +237,5 @@ Contributing
 
 ### Code formatting
 
-- use 4 spaces for indentation in Java files
-- sort java imports alphabetically (including static imports), do not use wildcard (star) imports
+- use `mvn spotless:apply` to format files in a uniform way before submitting as a PR
 - please do not reformat whole files in IDE (prevent accidental changes to unrelated lines)
