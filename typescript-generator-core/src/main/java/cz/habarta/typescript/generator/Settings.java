@@ -794,7 +794,7 @@ public class Settings {
     }
 
     private String seeLink() {
-        return "For more information see 'http://vojtechhabarta.github.io/typescript-generator/doc/ModulesAndNamespaces.html'.";
+        return "For more information see 'https://kkuegler.github.io/typescript-generator/doc/ModulesAndNamespaces.html'.";
     }
 
     private static <T> List<Class<? extends T>> loadClasses(ClassLoader classLoader, List<String> classNames,

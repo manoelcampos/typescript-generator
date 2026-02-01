@@ -49,7 +49,7 @@ public class GenerateMojo extends AbstractMojo {
      * <li><code>ambientModule</code> - means that generated declarations will be wrapped in <code>declare module "mod" { }</code> declaration</li>
      * </ul>
      * Required parameter.
-     * For more information see <a href="http://vojtechhabarta.github.io/typescript-generator/doc/ModulesAndNamespaces.html">Modules and Namespaces</a> Wiki page.
+     * For more information see <a href="https://kkuegler.github.io/typescript-generator/doc/ModulesAndNamespaces.html">Modules and Namespaces</a> Wiki page.
      */
     @Parameter(required = true)
     public TypeScriptOutputKind outputKind;

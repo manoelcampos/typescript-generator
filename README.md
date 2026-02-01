@@ -1,15 +1,10 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.kkuegler/typescript-generator-core.svg)](https://repo1.maven.org/maven2/com/github/kkuegler/typescript-generator-core/)
-[![Appveyor](https://img.shields.io/appveyor/ci/vojtechhabarta/typescript-generator/main.svg)](https://ci.appveyor.com/project/vojtechhabarta/typescript-generator)
 [![Stars](https://img.shields.io/github/stars/kkuegler/typescript-generator.svg?style=social)](https://github.com/kkuegler/typescript-generator)
 
 Quick links:
-[Configuration parameters](https://www.habarta.cz/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html)
-|
-[Breaking changes](https://github.com/kkuegler/typescript-generator/wiki/Breaking-Changes)
+[Configuration parameters](https://kkuegler.github.io/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html)
 |
 [Release notes](https://github.com/kkuegler/typescript-generator/releases)
-|
-[Playground _(beta)_](https://jechlin.github.io/ts-gen-aws/)
 
 > [!NOTE]
 > This repo tries to slowly modernize and evolve the original [typescript-generator](https://github.com/vojtechhabarta/typescript-generator).
@@ -86,7 +81,7 @@ In Maven build you can use `typescript-generator-maven-plugin` like this:
 ```
 
 More complete sample can be found [here](sample-maven).
-Detailed description how to configure typescript-generator-maven-plugin is on generated [site](http://vojtechhabarta.github.io/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html).
+Detailed description how to configure typescript-generator-maven-plugin is on generated [site](https://kkuegler.github.io/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html).
 
 
 Gradle
@@ -133,7 +128,7 @@ You can run typescript-generator on demand using `gradle generateTypeScript` com
 or you can invoke it as part of another task by adding dependency from that task to `generateTypeScript` task in Gradle build file.
 
 More complete sample can be found [here](sample-gradle).
-Gradle plugin has the same features as Maven plugin, for detailed description see Maven generated [site](http://vojtechhabarta.github.io/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html). 
+Gradle plugin has the same features as Maven plugin, for detailed description see Maven generated [site](https://kkuegler.github.io/typescript-generator/maven/typescript-generator-maven-plugin/generate-mojo.html). 
 
 
 Direct invocation
@@ -164,7 +159,7 @@ Output is configured using several parameters:
     - values are: `declarationFile` (.d.ts) or `implementationFile` (.ts)
 - `outputFile` - specifies path and name of output file
 
-For more details see [Modules and Namespaces](http://vojtechhabarta.github.io/typescript-generator/doc/ModulesAndNamespaces.html) page.
+For more details see [Modules and Namespaces](https://kkuegler.github.io/typescript-generator/doc/ModulesAndNamespaces.html) page.
 
 
 REST frameworks
