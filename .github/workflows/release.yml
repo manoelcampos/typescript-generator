@@ -1,7 +1,8 @@
 name: Release to Maven Central
 
 on:
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -18,8 +19,13 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.GPG_SIGNING_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      - id: extract-version
+        run: |
+          # drop leading 'v' from 'v4.3.2'
+          version=$(echo ${{github.event.release.tag_name}} | cut -dv -f2-)
+          echo "version=$version" >> $GITHUB_OUTPUT
       - name: Set version
-        run: mvn versions:set -DnewVersion=4.0.0-SNAPSHOT
+        run: mvn versions:set -DnewVersion=${{steps.extract-version.outputs.version}}
       - name: Publish package
         run: mvn -P release --batch-mode clean deploy
         env:
