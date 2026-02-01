@@ -169,6 +169,7 @@
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs>
                         <arg>-Xlint</arg>
+                        <arg>-Xlint:-processing</arg>
                         <arg>-parameters</arg>
                     </compilerArgs>
                 </configuration>
