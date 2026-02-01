@@ -11,6 +11,10 @@ Quick links:
 |
 [Playground _(beta)_](https://jechlin.github.io/ts-gen-aws/)
 
+> [!NOTE]
+> This repo tries to slowly modernize and evolve the original [typescript-generator](https://github.com/vojtechhabarta/typescript-generator).
+> Currently we are working on dependencies and the Maven plugin. The Gradle plugin will be released later. 
+
 typescript-generator
 ====================
 typescript-generator is a tool for generating TypeScript definition files (.d.ts) from Java JSON classes.
@@ -231,9 +235,10 @@ Links
 Contributing
 ------------
 
-- current major version supports Java 8 and later (version 1 supported Java 7 and 8)
+- the current major version supports Java 17 and later
 - keep pull requests small and focused ([10 tips for better Pull Requests](http://blog.ploeh.dk/2015/01/15/10-tips-for-better-pull-requests/))
-- do not add dependencies unless previously discussed in issue
+- ideally discuss adding dependencies or bigger features in a GitHub issue first
+  - this reduces the risk of wasted effort for a PR
 
 ### Code formatting
 
