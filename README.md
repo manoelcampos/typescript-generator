@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.kkuegler/typescript-generator-core.svg)](https://repo1.maven.org/maven2/com/github/kkuegler/typescript-generator-core/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.kkuegler/typescript-generator-core.svg)](https://repo1.maven.org/maven2/io/github/kkuegler/typescript-generator-core/)
 [![Stars](https://img.shields.io/github/stars/kkuegler/typescript-generator.svg?style=social)](https://github.com/kkuegler/typescript-generator)
 
 Quick links:
@@ -189,7 +189,7 @@ Download
 --------
 Releases are available from Maven Central Repository.
 [Search](http://search.maven.org/#search%7Cga%7C1%7Ccz.habarta.typescript-generator) for dependency information for your build tool
-or download [typescript-generator-core](https://repo1.maven.org/maven2/com/github/kkuegler/typescript-generator-core) directly.
+or download [typescript-generator-core](https://repo1.maven.org/maven2/io/github/kkuegler/typescript-generator-core) directly.
 
 
 Wiki
