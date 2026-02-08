@@ -8,7 +8,7 @@ Quick links:
 
 > [!NOTE]
 > This repo tries to slowly modernize and evolve the original [typescript-generator](https://github.com/vojtechhabarta/typescript-generator).
-> Currently we are working on dependencies and the Maven plugin. The Gradle plugin will be released later. 
+> Bug reports and pull requests are very welcome, but as I am new to the code base, it will some time to review and merge them. 
 
 typescript-generator
 ====================
@@ -60,7 +60,7 @@ In Maven build you can use `typescript-generator-maven-plugin` like this:
 <plugin>
     <groupId>com.github.kkuegler</groupId>
     <artifactId>typescript-generator-maven-plugin</artifactId>
-    <version>x.y.z</version>
+    <version>4.0.0</version>
     <executions>
         <execution>
             <id>generate</id>
@@ -90,7 +90,7 @@ Gradle
 In Gradle build you can use `com.github.kkuegler.typescript-generator` plugin like this:
 ```groovy
 plugins {
-    id 'com.github.kkuegler.typescript-generator' version 'x.y.z'
+    id 'com.github.kkuegler.typescript-generator' version '4.0.0'
 }
 
 generateTypeScript {
@@ -111,7 +111,7 @@ import cz.habarta.typescript.generator.TypeScriptFileType
 import cz.habarta.typescript.generator.TypeScriptOutputKind
 
 plugins {
-    id("com.github.kkuegler.typescript-generator") version "x.y.z"
+    id("com.github.kkuegler.typescript-generator") version "4.0.0"
 }
 
 tasks {
