@@ -1,5 +1,6 @@
 package cz.habarta.typescript.generator.gradle;
 
+import cz.habarta.typescript.generator.TypeScriptFileType;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;
 import org.gradle.api.file.ConfigurableFileCollection;
@@ -19,16 +20,14 @@ public class TypeScriptGeneratorPlugin implements Plugin<Project> {
     public void apply(Project project) {
         // Create extension for user configuration
         TypeScriptGeneratorExtension extension = project.getExtensions().create(
-            "generateTypeScript",
-            TypeScriptGeneratorExtension.class
-        );
+                "generateTypeScript",
+                TypeScriptGeneratorExtension.class);
 
         // Register the task using TaskProvider for lazy configuration
         TaskProvider<GenerateTask> generateTaskProvider = project.getTasks().register(
-            "generateTypeScript",
-            GenerateTask.class,
-            task -> configureTask(project, task, extension)
-        );
+                "generateTypeScript",
+                GenerateTask.class,
+                task -> configureTask(project, task, extension));
 
         // Configure task dependencies when Java plugin is applied
         project.getPlugins().withId("java", plugin -> {
@@ -78,21 +77,33 @@ public class TypeScriptGeneratorPlugin implements Plugin<Project> {
 
         // Configure classpath by collecting compile classpath and output directories
         ConfigurableFileCollection classpath = project.getObjects().fileCollection();
-        
+
         // Add main source set output and classpath when Java plugin is applied
         project.getPlugins().withId("java", plugin -> {
             JavaPluginExtension javaExtension = project.getExtensions().getByType(JavaPluginExtension.class);
             SourceSetContainer sourceSets = javaExtension.getSourceSets();
             SourceSet mainSourceSet = sourceSets.getByName(SourceSet.MAIN_SOURCE_SET_NAME);
-            
+
             // Add compiled classes directory
             classpath.from(mainSourceSet.getOutput().getClassesDirs());
-            
+
             // Add compile classpath
             classpath.from(mainSourceSet.getCompileClasspath());
         });
 
         task.getClasspath().from(classpath);
+
+        // computed output file
+        task.getOutputFileProperty().fileProvider(extension.getOutputFile().map(project::file)
+                .orElse(extension.getOutputFileType().orElse(TypeScriptFileType.declarationFile).map(fileType -> {
+                    String fileExtension = switch (fileType) {
+                    case implementationFile -> ".ts";
+                    case declarationFile -> ".d.ts";
+                    };
+                    return task.getBuildDirectory()
+                            .file("typescript-generator/" + task.getProjectName().get() + fileExtension).get()
+                            .getAsFile();
+                })));
 
         // Copy all properties from extension to task
         task.getOutputFile().set(extension.getOutputFile());
