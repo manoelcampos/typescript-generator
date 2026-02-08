@@ -22,12 +22,12 @@ jobs:
           java-version: 17
       - name: Set version in Maven
         run: mvn versions:set -DnewVersion=${{ inputs.version }}
-      - name: Switch to Gradle plugin directory
-        run: cd typescript-generator-gradle-plugin
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v5
       - name: Build and publish with Gradle
-        run: ./gradlew publishPlugins --validate-only && ./gradlew publishPlugins
+        run: |
+          cd typescript-generator-gradle-plugin
+          ./gradlew publishPlugins --validate-only && ./gradlew publishPlugins
         env:
           ORG_GRADLE_PROJECT_version: ${{ inputs.version }}
           GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
