@@ -545,8 +545,8 @@ public class Jackson2Parser extends ModelParser {
                     .createInstance(objectMapper.getSerializationConfig(), objectMapper.getSerializerFactory());
             final JsonSerializer<?> jsonSerializer = BeanSerializerFactory.instance.createSerializer(serializerProvider,
                     javaType);
-            if (jsonSerializer != null && jsonSerializer instanceof BeanSerializer) {
-                return new BeanSerializerHelper((BeanSerializer) jsonSerializer);
+            if (jsonSerializer instanceof BeanSerializer beanDeserializer) {
+                return new BeanSerializerHelper(beanDeserializer);
             } else {
                 return null;
             }
@@ -563,8 +563,8 @@ public class Jackson2Parser extends ModelParser {
             final BeanDescription beanDescription = deserializationContext.getConfig().introspect(javaType);
             final JsonDeserializer<?> jsonDeserializer = BeanDeserializerFactory.instance
                     .createBeanDeserializer(deserializationContext, javaType, beanDescription);
-            if (jsonDeserializer != null && jsonDeserializer instanceof BeanDeserializer) {
-                return new BeanDeserializerHelper((BeanDeserializer) jsonDeserializer);
+            if (jsonDeserializer instanceof BeanDeserializer beanDeserializer) {
+                return new BeanDeserializerHelper(beanDeserializer);
             } else {
                 return null;
             }
@@ -743,7 +743,7 @@ public class Jackson2Parser extends ModelParser {
                 } catch (NoSuchFieldException noSuchFieldException) {
                     throw new RuntimeException(noSuchFieldException);
                 }
-            }).collect(Collectors.toList());
+            }).toList();
             for (Field constant : constants) {
                 Object value;
                 try {
@@ -780,16 +780,14 @@ public class Jackson2Parser extends ModelParser {
     private static List<String> getComments(JsonClassDescription classDescriptionAnnotation) {
         final String propertyDescriptionValue = classDescriptionAnnotation != null ? classDescriptionAnnotation.value()
                 : null;
-        final List<String> classComments = Utils.splitMultiline(propertyDescriptionValue, false);
-        return classComments;
+        return Utils.splitMultiline(propertyDescriptionValue, false);
     }
 
     private static List<String> getComments(JsonPropertyDescription propertyDescriptionAnnotation) {
         final String propertyDescriptionValue = propertyDescriptionAnnotation != null
                 ? propertyDescriptionAnnotation.value()
                 : null;
-        final List<String> propertyComments = Utils.splitMultiline(propertyDescriptionValue, false);
-        return propertyComments;
+        return Utils.splitMultiline(propertyDescriptionValue, false);
     }
 
 }

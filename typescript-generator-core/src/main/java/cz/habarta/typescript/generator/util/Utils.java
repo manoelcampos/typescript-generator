@@ -72,10 +72,7 @@ public final class Utils {
             }
             final int parameterTypesDiff = Arrays.asList(m1.getParameterTypes()).toString()
                     .compareTo(Arrays.asList(m2.getParameterTypes()).toString());
-            if (parameterTypesDiff != 0) {
-                return parameterTypesDiff;
-            }
-            return 0;
+            return parameterTypesDiff;
         };
     }
 
@@ -174,7 +171,7 @@ public final class Utils {
         if (containerAnnotation != null) {
             final Annotation[] annotations = Utils.getAnnotationElementValue(containerAnnotation, "value",
                     Annotation[].class);
-            Stream.of(annotations).forEach(repeatableAnnotations::add);
+            repeatableAnnotations.addAll(Arrays.asList(annotations));
         }
         return repeatableAnnotations;
     }
@@ -422,7 +419,7 @@ public final class Utils {
             }
             lastEnd = matcher.end();
         }
-        sb.append(Pattern.quote(glob.substring(lastEnd, glob.length())));
+        sb.append(Pattern.quote(glob.substring(lastEnd)));
         return Pattern.compile(sb.toString());
     }
 
