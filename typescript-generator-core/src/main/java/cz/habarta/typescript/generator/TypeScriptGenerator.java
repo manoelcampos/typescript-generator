@@ -214,7 +214,7 @@ public class TypeScriptGenerator {
     private static String getVersion() {
         try {
             final InputStream inputStream = TypeScriptGenerator.class.getResourceAsStream(
-                    "/META-INF/maven/com.github.kkuegler/typescript-generator-core/pom.properties");
+                    "/META-INF/maven/io.github.kkuegler/typescript-generator-core/pom.properties");
             if (inputStream != null) {
                 final Properties properties = new Properties();
                 properties.load(inputStream);

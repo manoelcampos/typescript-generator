@@ -762,7 +762,7 @@ public class Settings {
                     throw new RuntimeException(
                             "'generateStringApplicationInterface' or 'generateStringApplicationClient' parameter "
                                     + "was specified but '" + springClassName + "' was not found. "
-                                    + "Please add 'com.github.kkuegler:typescript-generator-spring' artifact "
+                                    + "Please add 'io.github.kkuegler:typescript-generator-spring' artifact "
                                     + "to typescript-generator plugin dependencies (not module dependencies).");
                 }
                 try {

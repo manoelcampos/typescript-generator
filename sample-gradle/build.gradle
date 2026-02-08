@@ -16,7 +16,7 @@ plugins {
     id 'groovy'
     id "org.jetbrains.kotlin.jvm" version "2.3.0"
     id 'scala'
-    id 'com.github.kkuegler.typescript-generator'
+    id 'io.github.kkuegler.typescript-generator'
 }
 
 version = '3.0'

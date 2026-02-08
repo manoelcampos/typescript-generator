@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.github.kkuegler</groupId>
+        <groupId>io.github.kkuegler</groupId>
         <artifactId>typescript-generator</artifactId>
         <version>dev-SNAPSHOT</version>
     </parent>
@@ -18,7 +18,7 @@
     <dependencies>
         <!--compile dependencies-->
         <dependency>
-            <groupId>com.github.kkuegler</groupId>
+            <groupId>io.github.kkuegler</groupId>
             <artifactId>typescript-generator-core</artifactId>
             <version>dev-SNAPSHOT</version>
         </dependency>
@@ -45,7 +45,7 @@
 
         <!--test dependencies-->
         <dependency>
-            <groupId>com.github.kkuegler</groupId>
+            <groupId>io.github.kkuegler</groupId>
             <artifactId>typescript-generator-core</artifactId>
             <version>dev-SNAPSHOT</version>
             <type>test-jar</type>
