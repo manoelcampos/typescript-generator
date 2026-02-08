@@ -190,7 +190,7 @@ public class Jackson2Parser extends ModelParser {
                                         .introspect(TypeFactory.defaultInstance().constructType(rawClass));
                                 final JsonFormat.Value formatOverride = serializationConfig
                                         .getDefaultPropertyFormat(Map.Entry.class);
-                                final JsonFormat.Value formatFromAnnotation = beanDescription.findExpectedFormat(null);
+                                final JsonFormat.Value formatFromAnnotation = beanDescription.findExpectedFormat();
                                 final JsonFormat.Value format = JsonFormat.Value.merge(formatFromAnnotation,
                                         formatOverride);
                                 if (format.getShape() != JsonFormat.Shape.OBJECT) {
