@@ -14,11 +14,6 @@
         <fluidoSkin>
             <topBarEnabled>false</topBarEnabled>
             <sideBarEnabled>true</sideBarEnabled>
-            <gitHub>
-                <projectId>kkuegler/typescript-generator</projectId>
-                <ribbonOrientation>right</ribbonOrientation>
-                <ribbonColor>green</ribbonColor>
-            </gitHub>
         </fluidoSkin>
     </custom>
 
@@ -34,9 +29,4 @@
 
         <menu ref="reports"/>
     </body>
-
-    <poweredBy>
-        <logo width="0"/>
-    </poweredBy>
-
 </project>
