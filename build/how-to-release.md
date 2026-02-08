@@ -3,7 +3,7 @@
 - Create and publish a new GitHub release.
 - This will trigger a GitHub actions run, deploying to Maven Central.
   - The version number is determined by dropping 'v' from the tag name like 'v4.3.2'
-  - Also works with pre-releases and 'v4.0.0-SNAPSHOT' style branch names.
+  - Also works with pre-releases and 'v4.0.0-SNAPSHOT' style tag names.
 - Go to https://central.sonatype.com/publishing and promote the release.
     - "Staging Repositories"
     - "Close" the repo
