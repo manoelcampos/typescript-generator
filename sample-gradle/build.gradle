@@ -1,11 +1,13 @@
+import cz.habarta.typescript.generator.JsonLibrary
+import cz.habarta.typescript.generator.TypeScriptOutputKind
 
 buildscript {
-    // /*dev*/ repositories {
-    // /*dev*/     mavenLocal()
-    // /*dev*/ }
+    /* dev */
+    repositories {
+        mavenLocal()
+    }
     dependencies {
-        classpath 'com.fasterxml.jackson.module:jackson-module-scala_2.13:2.14.2'
-        // /*dev*/ classpath 'com.github.kkuegler:typescript-generator-gradle-plugin:FILL_VERSION-SNAPSHOT'
+        classpath 'com.fasterxml.jackson.module:jackson-module-scala_2.13:2.21.0'
     }
 }
 
@@ -14,10 +16,8 @@ plugins {
     id 'groovy'
     id "org.jetbrains.kotlin.jvm" version "2.3.0"
     id 'scala'
-    /*prod*/ id 'com.github.kkuegler.typescript-generator' version 'dev-SNAPSHOT'
+    id 'com.github.kkuegler.typescript-generator'
 }
-
-// /*dev*/ apply plugin: 'com.github.kkuegler.typescript-generator'
 
 version = '3.0'
 java {
@@ -45,8 +45,8 @@ generateTypeScript {
         'cz.habarta.typescript.generator.sample.PersonKt',
         'cz.habarta.typescript.generator.sample.PersonScala',
     ]
-    jsonLibrary = 'jackson2'
-    outputKind = 'module'
+    jsonLibrary = JsonLibrary.jackson2
+    outputKind = TypeScriptOutputKind.module
     excludeClasses = [
         'groovy.lang.GroovyObject',
         'groovy.lang.MetaClass',
@@ -61,4 +61,4 @@ generateTypeScript {
     ]
 }
 
-build.dependsOn generateTypeScript
+tasks.build.dependsOn 'generateTypeScript'

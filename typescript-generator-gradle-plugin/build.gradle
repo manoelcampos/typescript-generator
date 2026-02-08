@@ -1,0 +1,44 @@
+plugins {
+    id 'java-gradle-plugin'
+    id "com.gradle.plugin-publish" version "2.0.0"
+}
+
+group = 'com.github.kkuegler'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation "com.github.kkuegler:typescript-generator-core:${version}"
+}
+
+gradlePlugin {
+    website = "https://github.com/kkuegler/typescript-generator"
+    vcsUrl = "https://github.com/kkuegler/typescript-generator.git"
+    plugins {
+        register('typeScriptGeneratorPlugin') {
+            id = 'com.github.kkuegler.typescript-generator'
+            displayName = 'TypeScript Generator'
+            description = 'Generates TypeScript from Java - JSON declarations, REST service client'
+            tags = ['java', 'kotlin', 'json', 'typescript', 'typescript-generator', 'jackson', 'jakarta', 'rest', 'client', 'spring']
+            implementationClass = 'cz.habarta.typescript.generator.gradle.TypeScriptGeneratorPlugin'
+        }
+    }
+}
+
+// dev
+// publishing {
+//     repositories {
+//         maven {
+//             url = layout.buildDirectory.dir('testPublish')
+//         }
+//     }
+// }

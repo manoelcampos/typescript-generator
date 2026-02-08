@@ -1,7 +1,20 @@
+import cz.habarta.typescript.generator.JsonLibrary
+import cz.habarta.typescript.generator.TypeScriptFileType
+import cz.habarta.typescript.generator.TypeScriptOutputKind
+
+buildscript {
+    /*dev*/
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        /*dev*/ classpath 'com.github.kkuegler:typescript-generator-spring:dev-SNAPSHOT'
+    }
+}
 
 plugins {
     id 'java'
-    id 'com.github.kkuegler.typescript-generator' version 'dev-SNAPSHOT'
+    id 'com.github.kkuegler.typescript-generator'
 }
 
 version = '3.0'
@@ -23,11 +36,11 @@ generateTypeScript {
     classes = [
         'cz.habarta.typescript.generator.sample.spring.SpringTestApplication'
     ]
-    outputFileType = 'implementationFile'
-    jsonLibrary = 'jackson2'
-    outputKind = 'module'
+    outputFileType = TypeScriptFileType.implementationFile
+    jsonLibrary = JsonLibrary.jackson2
+    outputKind = TypeScriptOutputKind.module
     scanSpringApplication = true
     generateSpringApplicationClient = true
 }
 
-build.dependsOn generateTypeScript
+tasks.build.dependsOn 'generateTypeScript'
