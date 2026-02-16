@@ -9,7 +9,8 @@ public class Jackson3PolymorphismTest {
 
     @Test
     public void testPropertyNameQuoting() {
-        final String output = new TypeScriptGenerator(TestUtils.settings(true)).generateTypeScript(Input.from(BadFieldClass.class));
+        final String output = new TypeScriptGenerator(TestUtils.settings(true))
+                .generateTypeScript(Input.from(BadFieldClass.class));
         Assertions.assertTrue(output.contains("\"@class\""));
     }
 

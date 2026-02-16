@@ -16,11 +16,11 @@ public class Jackson3DeserializableRootType {
     @Test
     public void testHowJacksonDeserializes() throws JsonProcessingException {
         NonAbstractRoot nar = new ObjectMapper()
-                        .readValue("{\"type\": \"rootType\"}",
-                                        NonAbstractRoot.class);
+                .readValue("{\"type\": \"rootType\"}",
+                        NonAbstractRoot.class);
         NonAbstractRoot nars = new ObjectMapper()
-                        .readValue("{\"type\": \"subType\"}",
-                                        NonAbstractRoot.class);
+                .readValue("{\"type\": \"subType\"}",
+                        NonAbstractRoot.class);
 
         Assertions.assertSame(NonAbstractRoot.class, nar.getClass());
         Assertions.assertSame(NonAbstractRootSub.class, nars.getClass());
@@ -28,7 +28,8 @@ public class Jackson3DeserializableRootType {
 
     @Test
     public void testRootTypeIncludedIfNotAbstract() {
-        final String output = new TypeScriptGenerator(TestUtils.settings(true)).generateTypeScript(Input.from(NonAbstractRoot.class));
+        final String output = new TypeScriptGenerator(TestUtils.settings(true))
+                .generateTypeScript(Input.from(NonAbstractRoot.class));
         Assertions.assertTrue(output.contains("\"rootType\""));
     }
 
@@ -44,7 +45,8 @@ public class Jackson3DeserializableRootType {
 
     @Test
     public void testRootTypeNotIncludedIfAbstract() {
-        final String output = new TypeScriptGenerator(TestUtils.settings(true)).generateTypeScript(Input.from(AbstractRoot.class));
+        final String output = new TypeScriptGenerator(TestUtils.settings(true))
+                .generateTypeScript(Input.from(AbstractRoot.class));
         // Root type is abstract and therefore ignored in the type list
         Assertions.assertFalse(output.contains("\"rootType\""));
     }

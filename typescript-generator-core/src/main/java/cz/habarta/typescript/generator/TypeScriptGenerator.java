@@ -176,11 +176,11 @@ public class TypeScriptGenerator {
 
     private ModelParser.Factory getModelParserFactory() {
         return switch (settings.jsonLibrary) {
-            case jackson2 -> new Jackson2Parser.Jackson2ParserFactory();
-            case jackson3 -> new Jackson3Parser.Jackson3ParserFactory();
-            case jaxb -> new Jackson2Parser.JaxbParserFactory();
-            case gson -> new GsonParser.Factory();
-            case jsonb -> new JsonbParser.Factory();
+        case jackson2 -> new Jackson2Parser.Jackson2ParserFactory();
+        case jackson3 -> new Jackson3Parser.Jackson3ParserFactory();
+        case jaxb -> new Jackson2Parser.JaxbParserFactory();
+        case gson -> new GsonParser.Factory();
+        case jsonb -> new JsonbParser.Factory();
         };
     }
 

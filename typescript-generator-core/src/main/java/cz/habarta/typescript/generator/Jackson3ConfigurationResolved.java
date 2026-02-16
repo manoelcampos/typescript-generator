@@ -34,18 +34,23 @@ public class Jackson3ConfigurationResolved {
         resolved.creatorVisibility = configuration.creatorVisibility;
         resolved.fieldVisibility = configuration.fieldVisibility;
         resolved.shapeConfigOverrides = resolveClassMappings(
-            configuration.shapeConfigOverrides, "shapeConfigOverride", classLoader, Object.class, JsonFormat.Shape::valueOf);
+                configuration.shapeConfigOverrides, "shapeConfigOverride", classLoader, Object.class,
+                JsonFormat.Shape::valueOf);
         resolved.enumsUsingToString = configuration.enumsUsingToString;
         resolved.disableObjectIdentityFeature = configuration.disableObjectIdentityFeature;
         resolved.deserializerTypeMappings = resolveClassMappings(
-            configuration.deserializerTypeMappings, "deserializerTypeMapping", classLoader, ValueDeserializer.class, Function.identity());
+                configuration.deserializerTypeMappings, "deserializerTypeMapping", classLoader, ValueDeserializer.class,
+                Function.identity());
         resolved.serializerTypeMappings = resolveClassMappings(
-            configuration.serializerTypeMappings, "serializerTypeMapping", classLoader, ValueSerializer.class, Function.identity());
-        resolved.view = configuration.view != null ? Settings.loadClass(classLoader, configuration.view, Object.class) : null;
+                configuration.serializerTypeMappings, "serializerTypeMapping", classLoader, ValueSerializer.class,
+                Function.identity());
+        resolved.view = configuration.view != null ? Settings.loadClass(classLoader, configuration.view, Object.class)
+                : null;
         return resolved;
     }
 
-    private static <C, V> Map<Class<? extends C>, V> resolveClassMappings(List<String> mappings, String mappingName, ClassLoader classLoader,
+    private static <C, V> Map<Class<? extends C>, V> resolveClassMappings(List<String> mappings, String mappingName,
+            ClassLoader classLoader,
             Class<? extends C> key, Function<String, V> valueConvertor) {
         if (mappings == null) {
             return null;

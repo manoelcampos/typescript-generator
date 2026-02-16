@@ -130,10 +130,10 @@ public class Jackson3ParserTest {
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
     @JsonSubTypes({
-        @JsonSubTypes.Type(value = SubTypeDiscriminatedByName1.class, name = "SubType1"), // value from @JsonTypeName is used
-        @JsonSubTypes.Type(value = SubTypeDiscriminatedByName2.class, name = "SubType2"),
-        @JsonSubTypes.Type(value = SubTypeDiscriminatedByName3.class),
-        @JsonSubTypes.Type(value = SubTypeDiscriminatedByName4.class),
+            @JsonSubTypes.Type(value = SubTypeDiscriminatedByName1.class, name = "SubType1"), // value from @JsonTypeName is used
+            @JsonSubTypes.Type(value = SubTypeDiscriminatedByName2.class, name = "SubType2"),
+            @JsonSubTypes.Type(value = SubTypeDiscriminatedByName3.class),
+            @JsonSubTypes.Type(value = SubTypeDiscriminatedByName4.class),
     })
     private static interface ParentWithNameDiscriminant {
     }
@@ -141,11 +141,14 @@ public class Jackson3ParserTest {
     @JsonTypeName("explicit-name1")
     private static class SubTypeDiscriminatedByName1 implements ParentWithNameDiscriminant {
     }
+
     private static class SubTypeDiscriminatedByName2 implements ParentWithNameDiscriminant {
     }
+
     @JsonTypeName(/* Default should be the simplename of the class */)
     private static class SubTypeDiscriminatedByName3 implements ParentWithNameDiscriminant {
     }
+
     private static class SubTypeDiscriminatedByName4 implements ParentWithNameDiscriminant {
     }
 
@@ -166,7 +169,8 @@ public class Jackson3ParserTest {
     public void testOptionalJsonProperty() {
         final Settings settings = TestUtils.settings(true);
         settings.optionalProperties = OptionalProperties.useLibraryDefinition;
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithOptionals.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithOptionals.class));
         Assertions.assertTrue(output.contains("oname1?: string"));
         Assertions.assertTrue(output.contains("oname2?: string"));
         Assertions.assertTrue(output.contains("jname1?: string"));
@@ -184,7 +188,8 @@ public class Jackson3ParserTest {
         final Settings settings = TestUtils.settings(true);
         settings.jsonLibrary = JsonLibrary.jaxb;
         settings.optionalProperties = OptionalProperties.useLibraryDefinition;
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithOptionals.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithOptionals.class));
         Assertions.assertTrue(output.contains("oname1?: string"));
         Assertions.assertTrue(output.contains("oname2?: string"));
         Assertions.assertTrue(output.contains("jname1?: string"));
@@ -208,6 +213,7 @@ public class Jackson3ParserTest {
         @JsonProperty(required = true)
         public String jname3;
         private String jname4;
+
         @JsonProperty(required = true)
         public String getJname4() {
             return jname4;
@@ -220,6 +226,7 @@ public class Jackson3ParserTest {
         @XmlElement(required = true)
         public String xname3;
         private String xname4;
+
         @XmlElement(required = true)
         public String getXname4() {
             return xname4;
@@ -280,7 +287,8 @@ public class Jackson3ParserTest {
     @Test
     public void testIgnoredProperty() {
         final Settings settings = TestUtils.settings(true);
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithIgnoredProperty.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithIgnoredProperty.class));
         Assertions.assertTrue(output.contains("name1: string"));
         Assertions.assertTrue(!output.contains("name2: string"));
     }
@@ -291,19 +299,20 @@ public class Jackson3ParserTest {
         public String name2;
     }
 
-//    public static void main(String[] args) throws JsonProcessingException {
-//        final ObjectMapper objectMapper = new ObjectMapper();
-//        final ClassWithIgnoredProperty instance = new ClassWithIgnoredProperty();
-//        instance.name1 = "xxx";
-//        instance.name2 = "xxx";
-//        System.out.println(objectMapper.writeValueAsString(instance));
-//    }
+    //    public static void main(String[] args) throws JsonProcessingException {
+    //        final ObjectMapper objectMapper = new ObjectMapper();
+    //        final ClassWithIgnoredProperty instance = new ClassWithIgnoredProperty();
+    //        instance.name1 = "xxx";
+    //        instance.name2 = "xxx";
+    //        System.out.println(objectMapper.writeValueAsString(instance));
+    //    }
 
     @Test
     public void testVisibilityConfiguration() {
         {
             final Settings settings = TestUtils.settings(true);
-            final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithDifferentMemberVisibilities.class));
+            final String output = new TypeScriptGenerator(settings)
+                    .generateTypeScript(Input.from(ClassWithDifferentMemberVisibilities.class));
             Assertions.assertTrue(!output.contains("property1: string"));
             Assertions.assertTrue(output.contains("property2: string"));
         }
@@ -311,7 +320,8 @@ public class Jackson3ParserTest {
             final Settings settings = TestUtils.settings(true);
             settings.jackson3Configuration = new Jackson3ConfigurationResolved();
             settings.jackson3Configuration.setVisibility(ANY, NONE, NONE, NONE, NONE);
-            final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithDifferentMemberVisibilities.class));
+            final String output = new TypeScriptGenerator(settings)
+                    .generateTypeScript(Input.from(ClassWithDifferentMemberVisibilities.class));
             Assertions.assertTrue(output.contains("property1: string"));
             Assertions.assertTrue(!output.contains("property2: string"));
         }
@@ -319,6 +329,7 @@ public class Jackson3ParserTest {
 
     private static class ClassWithDifferentMemberVisibilities {
         private String property1;
+
         public String getProperty2() {
             return null;
         }
@@ -341,7 +352,8 @@ public class Jackson3ParserTest {
     public void testDescriptions() {
         final Settings settings = TestUtils.settings(true);
         settings.mapEnum = EnumMapping.asEnum;
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithDescriptions.class, EnumWithDescriptions.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithDescriptions.class, EnumWithDescriptions.class));
         Assertions.assertTrue(output.contains("Class description"));
         Assertions.assertTrue(output.contains("Property description"));
         Assertions.assertTrue(output.contains("second line"));
@@ -380,6 +392,7 @@ public class Jackson3ParserTest {
         public String getId() {
             return UUID.randomUUID().toString();
         }
+
         public String getName() {
             return "myProject";
         }
@@ -403,7 +416,8 @@ public class Jackson3ParserTest {
 
     public static class IdSerializer extends ValueSerializer<Identifyable> {
         @Override
-        public void serialize(Identifyable value, JsonGenerator gen, SerializationContext ctxt) throws JacksonException {
+        public void serialize(Identifyable value, JsonGenerator gen, SerializationContext ctxt)
+                throws JacksonException {
             gen.writeStartObject();
             gen.writeStringProperty("id", value.getId());
             gen.writeEndObject();
@@ -421,8 +435,8 @@ public class Jackson3ParserTest {
         public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws JacksonException {
             final String text = p.getText();
             return Objects.equals("TODAY", text)
-                ? LocalDateTime.of(LocalDate.parse("2020-07-17"), LocalTime.MIN)
-                : LocalDateTime.parse(text);
+                    ? LocalDateTime.of(LocalDate.parse("2020-07-17"), LocalTime.MIN)
+                    : LocalDateTime.parse(text);
         }
     }
 
@@ -454,8 +468,10 @@ public class Jackson3ParserTest {
     public void testSerializerAndDeserializer() {
         final Settings settings = TestUtils.settings(true);
         settings.jackson3Configuration = new Jackson3ConfigurationResolved();
-        settings.jackson3Configuration.serializerTypeMappings = Collections.singletonMap(IdSerializer.class, "{ id: string }");
-        settings.jackson3Configuration.deserializerTypeMappings = Collections.singletonMap(LocalDateTimeJsonDeserializer.class, "\"TODAY\" | string");
+        settings.jackson3Configuration.serializerTypeMappings = Collections.singletonMap(IdSerializer.class,
+                "{ id: string }");
+        settings.jackson3Configuration.deserializerTypeMappings = Collections
+                .singletonMap(LocalDateTimeJsonDeserializer.class, "\"TODAY\" | string");
         final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(Contract.class));
         Assertions.assertTrue(output.contains("project: { id: string }"));
         Assertions.assertTrue(output.contains("projects: { id: string }[]"));
@@ -465,11 +481,12 @@ public class Jackson3ParserTest {
 
     @Test
     public void testConstructor() throws JacksonException {
-//        System.out.println(new ObjectMapper().readValue("{\"a\":\"a\", \"b\":\"b\"}", ClassWithJsonCreatorConstructor.class));
+        //        System.out.println(new ObjectMapper().readValue("{\"a\":\"a\", \"b\":\"b\"}", ClassWithJsonCreatorConstructor.class));
 
         final Settings settings = TestUtils.settings(true);
         settings.generateReadonlyAndWriteonlyJSDocTags = true;
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithJsonCreatorConstructor.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithJsonCreatorConstructor.class));
         Assertions.assertTrue(output.contains("a: string;"));
         Assertions.assertTrue(output.contains("b: string;"));
         Assertions.assertTrue(output.contains("@writeonly"));
@@ -489,17 +506,19 @@ public class Jackson3ParserTest {
         public String toString() {
             return "{" + "a=" + a + ", b=" + b + '}';
         }
-        
+
     }
+
     @Test
     public void testFactoryMethod() throws JacksonException {
-//        System.out.println(new ObjectMapper().readValue("{\"a\":\"a\", \"b\":\"b\"}", ClassWithJsonCreatorFactoryMethod.class));
+        //        System.out.println(new ObjectMapper().readValue("{\"a\":\"a\", \"b\":\"b\"}", ClassWithJsonCreatorFactoryMethod.class));
 
         final Settings settings = TestUtils.settings(true);
         settings.generateReadonlyAndWriteonlyJSDocTags = true;
         settings.optionalProperties = OptionalProperties.useSpecifiedAnnotations;
         settings.optionalAnnotations = Arrays.asList(MyOptional.class);
-        final String output = new TypeScriptGenerator(settings).generateTypeScript(Input.from(ClassWithJsonCreatorFactoryMethod.class));
+        final String output = new TypeScriptGenerator(settings)
+                .generateTypeScript(Input.from(ClassWithJsonCreatorFactoryMethod.class));
         Assertions.assertTrue(output.contains("a: string;"));
         Assertions.assertTrue(output.contains("b?: string;"));
         Assertions.assertTrue(output.contains("@writeonly"));
@@ -515,7 +534,8 @@ public class Jackson3ParserTest {
         }
 
         @JsonCreator
-        public static ClassWithJsonCreatorFactoryMethod create(@JsonProperty("a") String a, @MyOptional @JsonProperty("b") String b) {
+        public static ClassWithJsonCreatorFactoryMethod create(@JsonProperty("a") String a,
+                @MyOptional @JsonProperty("b") String b) {
             return new ClassWithJsonCreatorFactoryMethod(a, b);
         }
 
@@ -523,7 +543,7 @@ public class Jackson3ParserTest {
         public String toString() {
             return "{" + "a=" + a + ", b=" + b + '}';
         }
-        
+
     }
 
     @Retention(RetentionPolicy.RUNTIME)
