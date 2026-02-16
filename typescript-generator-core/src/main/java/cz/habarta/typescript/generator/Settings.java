@@ -25,6 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import tools.jackson.databind.JacksonModule;
 
 /**
  * See cz.habarta.typescript.generator.maven.GenerateMojo
@@ -45,6 +46,7 @@ public class Settings {
     private LoadedModuleDependencies loadedModuleDependencies = null;
     public JsonLibrary jsonLibrary = null;
     public Jackson2ConfigurationResolved jackson2Configuration = null;
+    public Jackson3ConfigurationResolved jackson3Configuration = null;
     public GsonConfiguration gsonConfiguration = null;
     public JsonbConfiguration jsonbConfiguration = null;
     public List<String> additionalDataLibraries = new ArrayList<>();
@@ -121,6 +123,8 @@ public class Settings {
     public String npmBuildScript = null;
     public boolean jackson2ModuleDiscovery = false;
     public List<Class<? extends Module>> jackson2Modules = new ArrayList<>();
+    public boolean jackson3ModuleDiscovery = false;
+    public List<Class<? extends JacksonModule>> jackson3Modules = new ArrayList<>();
     public ClassLoader classLoader = null;
 
     private boolean defaultStringEnumsOverriddenByExtension = false;
@@ -207,6 +211,12 @@ public class Settings {
         }
     }
 
+    public void setJackson3Configuration(ClassLoader classLoader, Jackson3Configuration configuration) {
+        if (configuration != null) {
+            jackson3Configuration = Jackson3ConfigurationResolved.from(configuration, classLoader);
+        }
+    }
+
     public void loadCustomTypeProcessor(ClassLoader classLoader, String customTypeProcessor) {
         if (customTypeProcessor != null) {
             this.customTypeProcessor = loadInstance(classLoader, customTypeProcessor, TypeProcessor.class);
@@ -261,6 +271,10 @@ public class Settings {
         this.jackson2Modules = loadClasses(classLoader, jackson2Modules, Module.class);
     }
 
+    public void loadJackson3Modules(ClassLoader classLoader, List<String> jackson3Modules) {
+        this.jackson3Modules = loadClasses(classLoader, jackson3Modules, JacksonModule.class);
+    }
+
     public static Map<String, String> convertToMap(List<String> items, String itemName) {
         final Map<String, String> result = new LinkedHashMap<>();
         if (items != null) {
@@ -308,6 +322,9 @@ public class Settings {
         }
         if (jackson2Configuration != null && jsonLibrary != JsonLibrary.jackson2) {
             throw new RuntimeException("'jackson2Configuration' parameter is only applicable to 'jackson2' library.");
+        }
+        if (jackson3Configuration != null && jsonLibrary != JsonLibrary.jackson3) {
+            throw new RuntimeException("'jackson3Configuration' parameter is only applicable to 'jackson3' library.");
         }
         if (!generateNpmPackageJson && (!npmPackageDependencies.isEmpty() || !npmDevDependencies.isEmpty()
                 || !npmPeerDependencies.isEmpty())) {
