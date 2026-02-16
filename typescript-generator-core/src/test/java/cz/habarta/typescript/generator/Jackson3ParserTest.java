@@ -1,7 +1,5 @@
 package cz.habarta.typescript.generator;
 
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
-import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 import com.fasterxml.jackson.annotation.JsonClassDescription;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,6 +40,9 @@ import tools.jackson.databind.annotation.JsonSerialize;
 import tools.jackson.databind.deser.std.StdDeserializer;
 import tools.jackson.databind.jsontype.NamedType;
 import tools.jackson.databind.module.SimpleModule;
+
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.ANY;
+import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 @SuppressWarnings("unused")
 public class Jackson3ParserTest {
