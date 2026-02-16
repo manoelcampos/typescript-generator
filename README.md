@@ -96,7 +96,7 @@ plugins {
 generateTypeScript {
     jsonLibrary = 'jackson3'
     classes = [
-        'de.codecentric.typescript.generator.sample.Person'
+        'cz.habarta.typescript.generator.sample.Person'
     ]
     outputKind = 'module'
 }

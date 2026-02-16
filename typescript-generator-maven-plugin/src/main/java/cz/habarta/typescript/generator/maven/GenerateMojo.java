@@ -216,7 +216,7 @@ public class GenerateMojo extends AbstractMojo {
     /**
      * Specifies Jackson 3 global configuration.
      * Description of individual parameters is in
-     * <a href="https://github.com/codecentric/typescript-generator/blob/main/typescript-generator-core/src/main/java/cz/habarta/typescript/generator/Jackson3Configuration.java">Jackson3Configuration</a>
+     * <a href="https://github.com/kkuegler/typescript-generator/blob/main/typescript-generator-core/src/main/java/cz/habarta/typescript/generator/Jackson3Configuration.java">Jackson3Configuration</a>
      * class on GitHub (latest version).
      */
     @Parameter
