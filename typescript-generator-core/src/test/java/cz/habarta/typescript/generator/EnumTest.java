@@ -310,7 +310,9 @@ public class EnumTest {
     }
 
     enum SideUsingToString {
+        // No @JsonProperty set here because since 2.16 @JsonProperty has a higher precedence than toString()
         Left("left-side"),
+        // No @JsonProperty set here because since 2.16 @JsonProperty has a higher precedence than toString()
         Right("right-side");
 
         private final String jsonValue;

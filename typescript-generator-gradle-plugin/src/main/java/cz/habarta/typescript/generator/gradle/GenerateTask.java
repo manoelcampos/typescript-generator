@@ -131,6 +131,10 @@ public abstract class GenerateTask extends DefaultTask {
 
     @Input
     @Optional
+    public abstract Property<Jackson3Configuration> getJackson3Configuration();
+
+    @Input
+    @Optional
     public abstract Property<GsonConfiguration> getGsonConfiguration();
 
     @Input
@@ -395,7 +399,15 @@ public abstract class GenerateTask extends DefaultTask {
 
     @Input
     @Optional
+    public abstract Property<Boolean> getJackson3ModuleDiscovery();
+
+    @Input
+    @Optional
     public abstract ListProperty<String> getJackson2Modules();
+
+    @Input
+    @Optional
+    public abstract ListProperty<String> getJackson3Modules();
 
     @Input
     @Optional
@@ -459,6 +471,7 @@ public abstract class GenerateTask extends DefaultTask {
                 getExcludeClassPatterns().getOrElse(Collections.emptyList()));
         settings.jsonLibrary = getJsonLibrary().get();
         settings.setJackson2Configuration(classLoader, getJackson2Configuration().getOrNull());
+        settings.setJackson3Configuration(classLoader, getJackson3Configuration().getOrNull());
         settings.gsonConfiguration = getGsonConfiguration().getOrNull();
         settings.jsonbConfiguration = getJsonbConfiguration().getOrNull();
         settings.additionalDataLibraries = nullableList(getAdditionalDataLibraries());
@@ -544,7 +557,9 @@ public abstract class GenerateTask extends DefaultTask {
         settings.setStringQuotes(getStringQuotes().getOrNull());
         settings.setIndentString(getIndentString().getOrNull());
         settings.jackson2ModuleDiscovery = getJackson2ModuleDiscovery().getOrElse(false);
+        settings.jackson3ModuleDiscovery = getJackson3ModuleDiscovery().getOrElse(false);
         settings.loadJackson2Modules(classLoader, nullableList(getJackson2Modules()));
+        settings.loadJackson3Modules(classLoader, nullableList(getJackson3Modules()));
         settings.classLoader = classLoader;
 
         return settings;

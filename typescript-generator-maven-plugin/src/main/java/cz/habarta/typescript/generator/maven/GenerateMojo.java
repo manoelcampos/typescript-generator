@@ -193,10 +193,11 @@ public class GenerateMojo extends AbstractMojo {
      * Library used in JSON classes.
      * Supported values are:
      * <ul>
-     * <li><code>jackson2</code> - annotations from `com.fasterxml.jackson.annotation` package</li>
-     * <li><code>jaxb</code> - annotations from `javax.xml.bind.annotation` package<li>
-     * <li><code>gson</code> - annotations from `com.google.gson.annotations` package<li>
-     * <li><code>jsonb</code> - annotations from `javax.json.bind.annotation` package<li>
+     * <li><code>jackson3</code> - annotations from `tools.jackson.databind.annotation` and `com.fasterxml.jackson.annotation` packages</li>
+     * <li><code>jackson2</code> - annotations from `com.fasterxml.jackson.databind` and `com.fasterxml.jackson.annotation` packages</li>
+     * <li><code>jaxb</code> - annotations from `javax.xml.bind.annotation` package</li>
+     * <li><code>gson</code> - annotations from `com.google.gson.annotations` package</li>
+     * <li><code>jsonb</code> - annotations from `javax.json.bind.annotation` package</li>
      * </ul>
      * Required parameter, recommended value is <code>jackson2</code>.
      */
@@ -211,6 +212,15 @@ public class GenerateMojo extends AbstractMojo {
      */
     @Parameter
     private Jackson2Configuration jackson2Configuration;
+
+    /**
+     * Specifies Jackson 3 global configuration.
+     * Description of individual parameters is in
+     * <a href="https://github.com/codecentric/typescript-generator/blob/main/typescript-generator-core/src/main/java/cz/habarta/typescript/generator/Jackson3Configuration.java">Jackson3Configuration</a>
+     * class on GitHub (latest version).
+     */
+    @Parameter
+    private Jackson3Configuration jackson3Configuration;
 
     /**
      * Specifies Gson global configuration.
@@ -812,10 +822,22 @@ public class GenerateMojo extends AbstractMojo {
     private boolean jackson2ModuleDiscovery;
 
     /**
+     * Turns on Jackson3 automatic module discovery.
+     */
+    @Parameter
+    private boolean jackson3ModuleDiscovery;
+
+    /**
      * Specifies Jackson2 modules to use.
      */
     @Parameter
     private List<String> jackson2Modules;
+
+    /**
+     * Specifies Jackson3 modules to use.
+     */
+    @Parameter
+    private List<String> jackson3Modules;
 
     /**
      * Specifies level of logging output.
@@ -855,6 +877,7 @@ public class GenerateMojo extends AbstractMojo {
         settings.setExcludeFilter(excludeClasses, excludeClassPatterns);
         settings.jsonLibrary = jsonLibrary;
         settings.setJackson2Configuration(classLoader, jackson2Configuration);
+        settings.setJackson3Configuration(classLoader, jackson3Configuration);
         settings.gsonConfiguration = gsonConfiguration;
         settings.jsonbConfiguration = jsonbConfiguration;
         settings.additionalDataLibraries = additionalDataLibraries;
@@ -922,7 +945,9 @@ public class GenerateMojo extends AbstractMojo {
         settings.setStringQuotes(stringQuotes);
         settings.setIndentString(indentString);
         settings.jackson2ModuleDiscovery = jackson2ModuleDiscovery;
+        settings.jackson3ModuleDiscovery = jackson3ModuleDiscovery;
         settings.loadJackson2Modules(classLoader, jackson2Modules);
+        settings.loadJackson3Modules(classLoader, jackson3Modules);
         settings.classLoader = classLoader;
         return settings;
     }

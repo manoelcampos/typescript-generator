@@ -32,6 +32,10 @@
             <name>Vojtech Habarta</name>
             <email>vojtech@habarta.cz</email>
         </developer>
+        <developer>
+            <name>Thomas Bosch</name>
+            <email>thomas.bosch@codecentric.de</email>
+        </developer>
     </developers>
 
     <scm>
@@ -128,6 +132,13 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
+                <groupId>tools.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>3.0.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
                 <groupId>org.glassfish.jersey</groupId>
                 <artifactId>jersey-bom</artifactId>
                 <version>3.1.3</version>
@@ -173,22 +184,6 @@
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
-                <executions>
-                    <!-- <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution> -->
-                    <!-- <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution> -->
-                </executions>
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
                 </configuration>
@@ -254,22 +249,10 @@
                     </execution>
                 </executions>
             </plugin>
-            <!--            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.5</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh-vojtech@habarta.cz</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
-                </configuration>
-            </plugin>-->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
                 <version>3.2.1</version>
-
                 <configuration>
                     <java>
                         <eclipse>
@@ -311,6 +294,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-plugin-plugin</artifactId>
+                    <version>3.15.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-plugin-report-plugin</artifactId>
                     <version>3.15.2</version>
                 </plugin>
             </plugins>
@@ -393,7 +381,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-report-plugin</artifactId>
-                <version>3.15.2</version>
                 <reportSets>
                     <reportSet>
                         <reports>
