@@ -60,7 +60,7 @@ In Maven build you can use `typescript-generator-maven-plugin` like this:
 <plugin>
     <groupId>io.github.kkuegler</groupId>
     <artifactId>typescript-generator-maven-plugin</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
     <executions>
         <execution>
             <id>generate</id>
@@ -90,7 +90,7 @@ Gradle
 In Gradle build you can use `io.github.kkuegler.typescript-generator` plugin like this:
 ```groovy
 plugins {
-    id 'io.github.kkuegler.typescript-generator' version '4.0.0'
+    id 'io.github.kkuegler.typescript-generator' version '4.1.0'
 }
 
 generateTypeScript {
@@ -111,7 +111,7 @@ import cz.habarta.typescript.generator.TypeScriptFileType
 import cz.habarta.typescript.generator.TypeScriptOutputKind
 
 plugins {
-    id("io.github.kkuegler.typescript-generator") version "4.0.0"
+    id("io.github.kkuegler.typescript-generator") version "4.1.0"
 }
 
 tasks {
