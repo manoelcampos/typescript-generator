@@ -8,7 +8,7 @@ Quick links:
 
 > [!NOTE]
 > This repo tries to slowly modernize and evolve the original [typescript-generator](https://github.com/vojtechhabarta/typescript-generator). \
-> Bug reports and pull requests are very welcome, but as I am new to the code base, it will take some time to review and merge them. 
+> Bug reports and pull requests are very welcome. As @dickerpulli and I are new to the code base, it will take some time to review and merge them.
 
 typescript-generator
 ====================
